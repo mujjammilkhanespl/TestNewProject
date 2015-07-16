@@ -1,0 +1,5 @@
+<apex:page controller="WebController">
+<apex:form >
+<p align = "center"> <apex:commandbutton value="call Web Service" action="{!call}"/>	</p>
+</apex:form>
+</apex:page>

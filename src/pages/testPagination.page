@@ -1,0 +1,19 @@
+<apex:page controller="testPaginationController">
+	<apex:form >
+		<apex:pageblock id="tb">
+			<apex:PageBlockTable value="{!lstQ}" var="v" >
+				<apex:column value="{!v.Id}"/>
+				<apex:column value="{!v.Name}"/>
+			</apex:PageBlockTable>
+			<apex:outputtext value="page {!cc.PageNumber} out of {!cc.TotalPages}"/>
+			<apex:commandButton value="First" action="{!first}" rendered="{!cc.hasPrevious}"  rerender="tb"/>
+			<apex:commandButton value="Next" action="{!next}" rendered="{!cc.hasNext}" rerender="tb"/>
+			<apex:commandButton value="Previous" action="{!previous}" rendered="{!cc.hasPrevious}"  rerender="tb"/>
+			<apex:commandButton value="Last" action="{!last}" rendered="{!cc.hasNext}"  rerender="tb"/>
+			<apex:outputtext value="{!lstq.size}"/>
+		</apex:pageblock>
+		<br/>
+		
+		
+	</apex:form>
+</apex:page>

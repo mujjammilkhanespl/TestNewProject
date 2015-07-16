@@ -1,0 +1,73 @@
+<apex:page >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function clk(i){
+            console.log("**** val "+i)
+            
+            var id = document.getElementById(i);
+            console.log("id = ",id);
+            id.className += "back";
+            console.log('css is ',document.getElementById(i).className);
+            //$(i).addClass("back");
+            //$a = $(i).css;
+           // console.log("siblings class :- ", $(i).siblings().removeClass("back"));
+           //$(i).siblings().removeClass("back");
+            //console.log("exiting",$(i));  
+            
+            switch(i){
+            	case "1" :
+            		console.log('switch case 1');
+            		document.getElementById("2").className = "";
+            		document.getElementById("3").className = "";
+            		document.getElementById("data").innerHTML = '<p><font  align = "centre"> Now you clicked on Link '+i+
+            		'<br/>You might be viewing this page because your Salesforce administrator didn’t create custom help. If you need information on a specific custom object, contact your administrator about creating custom help for your custom objects. The Salesforce Help covers only the standard objects provided with the initial Salesforce integration. </font></p>';
+            		
+            		break;
+            	case "2" :
+            		console.log('switch case 2');
+            		document.getElementById("1").className = "";
+            		document.getElementById("3").className = "";
+            		document.getElementById("data").innerHTML = '<p><font align = "centre"> Now you clicked on Link '+i+
+            		'<br/>Clicking on a custom object tab displays the tab home page. The name of a custom object tab is the plural form of the custom object as defined by your administrator. </font></p>';
+            		
+            		//document.getElementById("data1").innerHTML += '<br/><p><font size = "10"><b> Hello'+i+'</font></p><br/>';
+            		break;
+            	case "3" :
+            		console.log('switch case 3');
+            		document.getElementById("2").className = "";
+            		document.getElementById("1").className = "";
+            		document.getElementById("data").innerHTML = '<p><font  align = "centre"> Now you clicked on Link '+i+
+            		'<br/>The lower portion of the custom object record detail page provides information related to the custom object record, including activities, notes, attachments, and any other related records. The related lists you see are determined by your personal customization, and by any customization your administrator has made to page layouts or your permissions to view related data. You can click on individual items to display additional detail. Click more at the bottom of the page or View More below a related list to display more items. Clicking New lets you directly add new items. </font></p>';
+            		
+            		//document.getElementById("data1").innerHTML += '<br/><p><font size = "10"><b> Hello'+i+'</font></p><br/>';
+            		break;
+            	default : 
+            		console.log('default '+i);
+            }
+                      
+        }
+        
+    </Script>
+    <Style>
+    .back {
+        	background-color:#CCCCCC;
+			margin-left:0.3em;
+			font-weight:bold;  
+			font-size:15;      
+        }
+    
+    </Style>
+    <table width = "100%">
+        <tr>
+            <td width = "30%">
+                <div id = "dd"><a href = "#" id = "1" onclick = "clk(this.id)">Displaying and Editing Custom Object Records </a><br/>
+               <a href = "#" id = "2" onclick = "clk(this.id)">Sharing Custom Object Records </a><br/>
+                <a href = "#" id = "3" onclick = "clk(this.id)">Searching for Custom Object Records</a><br/></div>
+            </td>
+            <td width = "70%">
+                <div id = "data"> </div>
+                <div id = "data1"> </div>
+            </td>
+        </tr>
+    </table>
+</apex:page>

@@ -1,0 +1,6 @@
+<apex:page controller="FileController">
+<apex:form >
+<apex:inputfile value="{!csvFile}" accept=".csv" filename="{!filename}"/>
+<apex:commandButton value="check Files Content" action="{!check}"/>
+</apex:form>
+</apex:page>

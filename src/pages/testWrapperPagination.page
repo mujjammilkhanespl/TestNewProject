@@ -1,0 +1,39 @@
+<apex:page controller="wrapperPaginationController">
+    <apex:form >
+    <apex:actionFunction name="rerenderStates1"  rerender="rec" status="actStatusId"/>
+    
+    <apex:pageBlock >
+    <apex:pageblocktable value="{!lstBind}" var="row" id="rec" > 	    		       			
+	    <apex:column value="{!row['a'].Name}" /> 
+	    <apex:column value="{!row['a'].Status}" />
+	</apex:pageblocktable>
+	</apex:pageBlock>
+	<br/>  
+	<apex:outputpanel >
+	    		<table style = "width : 100%">
+	    		<tr>
+	    		<td style = "width : 33%" align = "center">
+	    		<apex:commandButton rendered="{!sc.hasPrevious}" value=" First " action="{!firstr}" onclick="rerenderStates1()"/>
+	    		  <apex:outputtext value="    "/> 
+	            <apex:commandButton rendered="{!sc.hasPrevious}" value=" Previous " action="{!previous}" onclick="rerenderStates1()"/>
+	         	</td>
+	         	<td style = "width : 33%" align = "center">
+	         	<b>
+	            <apex:outputText rendered="{!(sc.pageNumber * sc.pageSize) < sc.TotalRecords}" value=" Showing {!sc.pageNumber * sc.pageSize} Records out Of {!sc.TotalRecords} Records "/>
+ 	            <apex:outputText rendered="{!(sc.pageNumber * sc.pageSize) >= sc.TotalRecords}" value=" Showing {!sc.TotalRecords} Records out Of {!sc.TotalRecords} Records "/>  
+	           
+	            </b>
+	            </td>
+	            <td style = "width : 33%" align = "center">       
+	            <apex:commandButton rendered="{!sc.hasNext}" value=" Next " action="{!next}" onclick="rerenderStates1()" status="actStatusId"/>  
+	            <apex:outputtext value="    "/>         
+	            <apex:commandButton rendered="{!sc.hasNext}" value=" Last " action="{!lastR}" onclick="rerenderStates1()" />
+	         	</td>
+	         	</tr>
+	         	<tr align = "center"><td> </td><td> 
+	         	<b><apex:outputtext value="Page :- {!sc.pageNumber} "/></b>
+	         	</td><td></td></tr>
+	         	</table>  
+	         	</apex:outputpanel> 
+	         	</apex:form>
+</apex:page>

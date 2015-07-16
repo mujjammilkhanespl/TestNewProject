@@ -1,0 +1,25 @@
+<apex:page standardController="Apto__c">
+	<apex:sectionHeader title="Apto Edit" subtitle="{!Apto__c.Name}"/>
+	<apex:form >
+		<apex:pageBlock title="Apto Edit" mode="edit">
+
+			<apex:pageBlockButtons >
+				<apex:commandButton value="Save" action="{!save}"/>
+				<apex:commandButton value="Save & New" action="{!save}" />
+				<apex:commandButton value="Cancel" action="{!cancel}"/>
+			</apex:pageBlockButtons>
+
+
+			<apex:pageBlockSection title="Information" columns="2">
+				<apex:inputField value="{!Apto__c.Name}" required="false"/>
+				<apex:inputField value="{!Apto__c.OwnerId}" required="false"/>
+				<apex:inputField value="{!Apto__c.Status__c}" required="false"/>
+				<apex:inputField value="{!Apto__c.Record_Number__c}" required="false"/>
+				<apex:inputField value="{!Apto__c.Record_Name__c}" required="false"/>
+				<apex:inputField value="{!Apto__c.Account__c}" required="false"/>
+				<apex:inputField value="{!Apto__c.Active__c}" required="false"/>
+			</apex:pageBlockSection>
+
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

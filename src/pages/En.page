@@ -1,0 +1,5 @@
+<apex:page >
+<!--<apex:enhancedList ListId="Account" height="300" rowsPerPage="10" id="AccountList" />
+-->
+<apex:ListViews type="Quote" />
+</apex:page>

@@ -1,0 +1,5 @@
+<apex:page controller="RemoteController">
+	<apex:form >
+		<apex:commandbutton value="Add remote Site" action="{!add}"/>
+	</apex:form>
+</apex:page>

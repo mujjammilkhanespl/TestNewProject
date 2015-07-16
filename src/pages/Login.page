@@ -1,0 +1,128 @@
+<apex:page controller="LoginPageController" sidebar="false" showheader="false">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<apex:form >
+<FONT face="Verdana, Arial, Helvetica, sans-serif" size="2">
+<apex:pageMessages id="showmsg"/>
+<apex:actionFunction name="rerenderStates"  action="{!getFields}" rerender="field" >
+          <apex:param name="firstParam" assignTo="{!objectnm}" value="" />
+          </apex:actionFunction>
+          <apex:actionFunction name="rerenderStates2"  rerender="field" >         
+          </apex:actionFunction>
+<apex:actionFunction name="rerenderStates1" rerender="lists" >
+          <apex:param name="firstParam" assignTo="{!objectnm}" value="" />
+          </apex:actionFunction>
+<apex:outputPanel id="Login" rendered="{!log}">
+<br/><br/><br/>
+<table align = "center"><tr><td>
+<b><i> 
+<FONT face="Verdana, Arial, Helvetica, sans-serif" size="4">
+Welcome to Salesforce Login Page
+</FONT>
+</i></b></td></tr></table>
+<br/><br/><br/><br/><br/><br/><br/>
+
+<table align = "center" cellspacing = "2" cellpadding = "2">
+<tr><td>User Name :- </td><td><apex:Inputtext value="{!username}"/></td></tr>
+<tr><td>Password :- </td><td><apex:inputSecret value="{!Password}"/></td></tr>
+<tr><td>Security Token :- </td><td><apex:InputSecret value="{!token}"/></td></tr>
+
+<tr><td>Environment :- </td>
+ <td>
+ <apex:selectList value="{!environment}" size="1">
+ 	<apex:selectOptions value="{!options}"/>
+ 	</apex:selectList>
+ </td>
+ </tr>
+<tr></tr><tr></tr><tr></tr><tr></tr>
+<tr align="center"><td></td><td><apex:commandButton value="Login to your org" action="{!Login}"/></td></tr>
+</table>
+
+</apex:outputPanel>
+
+<apex:outputPanel id="showdata" layout="block" rendered="{!show}"  >
+		<p align ="center">
+		<p align ="right"> <b>	<apex:outputlabel value="Welcome {!Usernm} to your Org"/></b></p><br/><br/>
+		 <apex:outputlabel value="Select Object :- "/>
+			 <apex:selectList value="{!obj}" size="1" onChange="rerenderStates(this.value)">
+			 	<apex:selectOptions value="{!ObjectList}"/>
+			 	</apex:selectList><br/>
+			</p>
+			 <apex:outputpanel id="field">
+			 	<apex:outputlabel value="Fields are :- "/>	<br/>	<br/>	 	
+			 <!--  	<apex:commandbutton value="Get Fields" onclick="rerenderStates(this.value)"/><br/>-->
+			 
+			 	<!--  <apex:repeat value="{!fieldnames}" var="string" id="theRepeat">        			
+        			<FONT face="Verdana, Arial, Helvetica, sans-serif" size="2">
+        			<apex:outputText value="{!string}" id="theValue"/><br/>
+        			</FONT>
+    			</apex:repeat>
+    			-->
+    			<!-- <apex:outputpanel id="lists">
+    			<table>
+	    		<tr>
+	    		<td>	<apex:selectList value="{!fieldnm}" size="10" multiselect="true">
+				 	<apex:selectOptions value="{!fieldList}"/>
+				 	</apex:selectList>
+				 </td>
+				 <td>
+	    			<apex:commandbutton value="Add" action="{!add}" onclick="rerenderStates2()"/><br/><br/>
+	    			<apex:commandbutton value="Remove" action="{!remove}" onclick="rerenderStates2()"/>
+	    		 </td>
+	    		 <td>	
+	    			<apex:selectList value="{!selectfield}" size="10" multiselect="true">
+				 	<apex:selectOptions value="{!selectedfieldList}"/>
+				 	</apex:selectList>
+				 </td>
+				 	</tr>
+				 <tr><td> </td></tr>	<tr><td> </td></tr> <tr><td> </td></tr>
+			<tr> <td></td><td>	</td><td></td></tr>
+			 </table>
+			 	</apex:outputpanel> -->
+			 	<c:MultiselectPicklist id="chooseField" leftLabel="Available Fields" leftOptions="{!fieldList}" rightLabel="Selected Fields" rightOptions="{!selectedfieldList}" size="8"    width="150px" />
+
+			 <br/><br/>
+			 <apex:CommandButton value="Show Records" action="{!ShowRecord}" rerender="table"/>
+
+			 <br/><br/>
+			 <!-- <table cellspacing = "3" cellpadding = "3" >
+			 <th>
+			 
+			 </th>
+			 <tr>
+			 <td>
+				 <apex:dataTable value="{!lstid}" var="id">
+				 	<apex:column value="{!id}"/><br/>
+				</apex:dataTable>	
+			 </td>
+			 <td>
+				<apex:dataTable value="{!lstnm}" var="nm">
+				 	<apex:column value="{!nm}"/><br/>
+				</apex:dataTable>
+			 </td>
+			</tr>
+			</table> -->		 
+			 </apex:outputpanel>
+
+			<apex:pageBlock id="table" title="Records">
+			  <table cellspacing="15" cellpadding="2">
+			   <apex:repeat value="{!selnm}" var="row">
+			    <th>{!row}</th>
+			   </apex:repeat>
+			    <apex:repeat value="{!lstRecords}" var="lstmap">
+
+			    <tr>
+			     <apex:repeat value="{!selnm}" var="row">
+			      <td>
+			      	{!lstmap[row]}
+			      </td>
+			     </apex:repeat>
+			    </tr>
+			   </apex:repeat>
+			  </table>
+			 </apex:pageBlock>
+
+
+</apex:outputPanel>
+</FONT>
+</apex:form>
+</apex:page>

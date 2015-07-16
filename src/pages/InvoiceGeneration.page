@@ -1,0 +1,84 @@
+<apex:page standardcontroller="Amount__c" extensions="InvoiceController" sidebar="false" showheader="false">
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script>
+	var per = false;
+	var mul = true;
+	var m;
+	var finalamnt = 0;
+	function doshow(){
+	   var x = $("input[id$='input']");
+	   console.log('********'+x);
+	   console.log('\n******'+x.val());
+	   var val1 = x.val();
+	   console.log('****** input is '+val1);	   
+	   
+	   var val2 = {!amnt};
+	   
+	   console.log(' **** mul = '+mul +'*** per = '+per);
+	   if(val1 != 0 || val1!=null)
+		  {
+		   if(mul == true && per == false)
+		   {
+		   	finalamnt = val1 * val2;
+		   }
+		   if(per == true && mul == false)
+		   {
+		   	finalamnt = (val1 / 100) * val2 ;
+		   }
+	   	}	   
+	   $("label[id$='msg1']").html("Amount calculated is :- " + finalamnt);
+	   m = val2 - finalamnt;
+	   if(m < 0)
+	   	$("label[id$='msg2']").html("<font color = \"Red\">Amount for comission is :- " + m+"</font>");
+	   if(m >= 0)
+	   	$("label[id$='msg2']").html("<font color = \"green\">Amount for comission is :- " + m+"</font>");	   
+	}
+	function applyMethode(){
+	   var ASD = '{!$Organization.Id}';
+	   console.log('ORG ID :- '+ASD);
+	   var x = $('[id$=option]').val();
+	   
+	   if(x == 'mul')
+	   {
+	   	mul = true;	
+	   	per = false; 
+	   	}  
+	   if(x == 'per')
+	   	{
+	   	  per = true;
+	   	  mul = false;
+	   	}
+	   	doshow();
+	  
+	}
+</script>
+<apex:form >
+    <apex:pageBlock title="Select Amount">
+    <p align = "right">
+    <apex:outputlabel value="Amount is :- {!amnt}" /></p>
+    <p align = "right" id = "lbl">
+    <apex:outputlabel value="Amount calculated is :- " id="msg1"/></p>
+    <p align = "right" id = "lbl1">
+    <apex:outputlabel value="Amount for invoice is :-" id="msg2"/></p>
+    <br/><br/><br/><br/>
+     <apex:selectlist value="{!methode}" size="1" id="option" onChange="applyMethode();" >
+	    <apex:selectoptions value="{!list}"/>	    
+    </apex:selectlist>
+    								
+    <!--  
+    <apex:inputCheckbox id="box" /> 
+    -->
+    <input type="hidden" id="hide" value="{!input}"/>
+    <apex:inputtext value="{!input}" id="input" onkeyup="doshow();"/>
+    
+    
+    <p align = "right" id = "lbl3">
+    <apex:outputlabel value="Amount for invoice is :- {!output}" /></p>
+    
+    <apex:inputHidden value="{!output}" id="theField" />
+    <script> var theField = document.getElementById('{!$Component.theField}'); </script>
+    <apex:commandButton onclick="theField.value=finalamnt;" action="{!generate}" value="Generate Invoice"/>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>
