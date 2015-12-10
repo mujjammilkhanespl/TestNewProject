@@ -8,7 +8,7 @@ public with sharing class BackOrderController {
 				mapidSales.put(sale.id,sale);
 			}
 		}
-		
+		system.debug('mapidSales :- '+mapidSales);
 		
 
 		for(SalesHeader__c s : [select CreatedDate,LastModifiedDate from SalesHeader__c where id IN :mapidSales.keyset()]){
